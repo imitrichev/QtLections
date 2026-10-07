@@ -1,5 +1,7 @@
+#include "dataprocessor.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -12,6 +14,16 @@ MainWindow::MainWindow(QWidget *parent)
     connect(button1, &QPushButton::clicked,
                 this, &MainWindow::button1Fire);
 
+    DataProcessor dp;
+    connect(button1, &QPushButton::clicked,
+                this, [this, &dp] () {dp.processMessage(some_string);});
+
+    connect(this, &MainWindow::mySignal,
+                &dp, &DataProcessor::processMessage);
+
+    QString s1 = "blah";
+    emit mySignal(s1);
+    std::cout<<s1.toStdString()<<std::endl;
 }
 
 MainWindow::~MainWindow()
@@ -48,4 +60,6 @@ void MainWindow::button1Fire()
     model->setStringList(data);
 
     this->ui->listView->setModel(model);
+
+    emit
 }

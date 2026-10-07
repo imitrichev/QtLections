@@ -16,6 +16,9 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+private:
+signals:
+    void  mySignal(QString& s);
 
 private slots:
     void on_pushButton_clicked();
@@ -25,5 +28,6 @@ private:
     Ui::MainWindow *ui;
     QStringListModel *model;
     QPushButton *button1;
+    QString some_string;
 };
 #endif // MAINWINDOW_H

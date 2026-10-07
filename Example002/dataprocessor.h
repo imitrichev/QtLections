@@ -9,7 +9,8 @@ class DataProcessor : public QObject
 public:
     explicit DataProcessor(QObject *parent = nullptr);
 
-signals:
+public slots:
+    void processMessage(QString& s);
 
 };
 
